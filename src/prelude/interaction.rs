@@ -4,8 +4,6 @@ use crate::{serenity, Language};
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 
-pub const BUTTON_ID_VERIFY: &str = "verify";
-
 pub const INPUT_ID_TUM_ID: &str = "tum_id";
 pub const INPUT_ID_TOKEN: &str = "token";
 

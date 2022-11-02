@@ -1,6 +1,11 @@
 use std::{sync, time};
 
-use crate::{config::GuildConfig, database, email, serenity, INPUT_ID_TOKEN, INPUT_ID_TUM_ID};
+use crate::{
+    config::GuildConfig,
+    database, email,
+    serenity::{self, Mentionable},
+    INPUT_ID_TOKEN, INPUT_ID_TUM_ID,
+};
 use anyhow::{Context, Result};
 use derive_getters::Getters;
 
@@ -56,7 +61,6 @@ enum MessageState {
     InvalidTumId,
     Token,
     InvalidToken,
-    EmailError,
     Success,
     None,
 }
@@ -73,6 +77,7 @@ pub async fn join(
         let vanity_uses_after = member.guild_id.vanity_uses(ctx).await?;
 
         if vanity_uses_after == vanity_uses_before {
+            println!("{vanity_uses_after} {vanity_uses_before}");
             return Ok(());
         }
 
@@ -106,6 +111,7 @@ pub async fn verify(
 
     let mut member = interaction.member.clone().context("Not a Member?")?;
     let guild = serenity::Guild::get(ctx, interaction.guild_id.context("No guild?")?).await?;
+    let guild_config = GuildConfig::read(guild.id)?;
 
     let mut state = State::new(language);
     let mut info = Info::default();
@@ -177,14 +183,9 @@ pub async fn verify(
                     guild.name.clone(),
                 );
 
-                if email::send_email(data.config.email(), email_data)
-                    .await
-                    .is_ok()
-                {
-                    state.message_state = MessageState::Token;
-                } else {
-                    state.message_state = MessageState::EmailError;
-                }
+                email::send_email(data.config.email(), email_data).await?;
+
+                state.message_state = MessageState::Token;
             }
             InteractionState::AskToken => {
                 handle
@@ -201,8 +202,6 @@ pub async fn verify(
             InteractionState::ReceivedValidToken => {
                 handle.defer(&ctx).await?;
 
-                let guild_config = GuildConfig::read(guild.id)?;
-
                 if let Some(add) = guild_config.add() {
                     member.add_role(ctx, add).await?;
                 }
@@ -212,6 +211,11 @@ pub async fn verify(
                 }
 
                 database::add_verified(member.user.id, &info.tum_id)?;
+
+                if let Some(log) = guild_config.log() {
+                    log.say(ctx, format!("{} verified!", member.user.mention()))
+                        .await?;
+                }
 
                 state.message_state = MessageState::Success;
             }
@@ -252,9 +256,6 @@ pub async fn verify(
                 message
                     .edit(&ctx, |m| message::success(m, state.language))
                     .await?
-            }
-            MessageState::EmailError => {
-                //TODO: Email sending error
             }
             MessageState::None => {}
         }

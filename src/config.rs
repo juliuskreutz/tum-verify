@@ -32,21 +32,26 @@ pub struct EmailConfig {
 pub struct GuildConfig {
     add: Option<serenity::RoleId>,
     remove: Option<serenity::RoleId>,
+    log: Option<serenity::ChannelId>,
 }
 
 impl GuildConfig {
-    pub fn new(add: Option<serenity::RoleId>, remove: Option<serenity::RoleId>) -> Self {
-        Self { add, remove }
+    pub fn new(
+        add: Option<serenity::RoleId>,
+        remove: Option<serenity::RoleId>,
+        log: Option<serenity::ChannelId>,
+    ) -> Self {
+        Self { add, remove, log }
     }
 
     pub fn read(guild_id: serenity::GuildId) -> Result<Self> {
-        let config = toml::from_str(&fs::read_to_string(format!("{}.toml", guild_id))?)?;
+        let config = toml::from_str(&fs::read_to_string(format!("{guild_id}.toml"))?)?;
 
         Ok(config)
     }
 
     pub fn write(&self, guild_id: serenity::GuildId) -> Result<()> {
-        fs::write(format!("{}.toml", guild_id), toml::to_string(&self)?)?;
+        fs::write(format!("{guild_id}.toml"), toml::to_string(&self)?)?;
 
         Ok(())
     }

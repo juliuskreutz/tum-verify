@@ -73,8 +73,8 @@ pub fn token<'a>(
                 Eine Email wurde an Ihre TUM-Email geschickt. Bitte schreiben Sie den dort angegebenen code hier rein \
                 ([TUM-Email Anleitung](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'TUM-Email Anleitung')). \
                 Email verschickt an:
-                ```\n{}@mytum.de\n```
-                ", tum_id
+                ```\n{tum_id}@mytum.de\n```
+                "
             )),
         Language::English => embed
             .description(format!(
@@ -82,8 +82,8 @@ pub fn token<'a>(
                 An email has been sent to your TUM-account. Please send the code contained within into this channel \
                 ([TUM-Email Guide](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'How to access your TUM-Email')). \
                 Email sent to:
-                ```\n{}@mytum.de\n```
-                ", tum_id
+                ```\n{tum_id}@mytum.de\n```
+                "
             )),
     }
 }
@@ -104,9 +104,9 @@ pub fn invalid_token<'a>(
                 Eine Email wurde an Ihre TUM-Email geschickt. Bitte schreiben Sie den dort angegebenen code hier rein \
                 ([TUM-Email Anleitung](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'TUM-Email Anleitung')). \
                 Email verschickt an:
-                ```\n{}@mytum.de\n```
+                ```\n{tum_id}@mytum.de\n```
                 :warning: Ungültiger token eingegeben. Bitte geben Sie den Token ein, den Sie in der email gekriegt haben.
-                ", tum_id
+                "
             )),
         Language::English => embed
             .description(format!(
@@ -114,9 +114,9 @@ pub fn invalid_token<'a>(
                 An email has been sent to your TUM-account. Please send the code contained within into this channel \
                 ([TUM-Email Guide](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'How to access your TUM-Email')). \
                 Email sent to:
-                ```\n{}@mytum.de\n```
+                ```\n{tum_id}@mytum.de\n```
                 :warning: Invalid token entered. Please provide the token, which you created in your email.
-                ", tum_id
+                "
             )),
     }
 }

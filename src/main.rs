@@ -16,6 +16,7 @@ mod verify;
 const APPLICATION_ID_INIT: &str = "init";
 const OPTION_ID_ADD: &str = "add";
 const OPTION_ID_REMOVE: &str = "remove";
+const OPTION_ID_LOG: &str = "log";
 
 pub struct Data {
     pub config: Config,
@@ -47,6 +48,12 @@ impl Handler {
                                 o.name(OPTION_ID_REMOVE)
                                     .description(OPTION_ID_REMOVE)
                                     .kind(serenity::CommandOptionType::Role)
+                                    .required(false)
+                            })
+                            .create_option(|o| {
+                                o.name(OPTION_ID_LOG)
+                                    .description(OPTION_ID_LOG)
+                                    .kind(serenity::CommandOptionType::Channel)
                                     .required(false)
                             })
                     })
@@ -84,8 +91,8 @@ impl serenity::EventHandler for Handler {
                         .iter()
                         .find(|o| o.name == OPTION_ID_ADD)
                         .and_then(|o| o.value.clone())
-                        .and_then(|v| serde_json::from_value::<serenity::Role>(v).ok())
-                        .map(|r| r.id);
+                        .and_then(|v| v.as_str().map(|s| s.to_string()))
+                        .and_then(|r| r.parse().ok());
 
                     let remove = interaction
                         .data
@@ -93,10 +100,19 @@ impl serenity::EventHandler for Handler {
                         .iter()
                         .find(|o| o.name == OPTION_ID_REMOVE)
                         .and_then(|o| o.value.clone())
-                        .and_then(|v| serde_json::from_value::<serenity::Role>(v).ok())
-                        .map(|r| r.id);
+                        .and_then(|v| v.as_str().map(|s| s.to_string()))
+                        .and_then(|r| r.parse().ok());
 
-                    GuildConfig::new(add, remove).write(guild_id).unwrap();
+                    let log = interaction
+                        .data
+                        .options
+                        .iter()
+                        .find(|o| o.name == OPTION_ID_LOG)
+                        .and_then(|o| o.value.clone())
+                        .and_then(|v| v.as_str().map(|s| s.to_string()))
+                        .and_then(|r| r.parse().ok());
+
+                    GuildConfig::new(add, remove, log).write(guild_id).unwrap();
 
                     let guild = serenity::Guild::get(&ctx, guild_id).await.unwrap();
 
@@ -114,12 +130,11 @@ impl serenity::EventHandler for Handler {
                 if let Ok(language) = serde_json::from_str::<Language>(&interaction.data.custom_id)
                 {
                     if let Err(e) = verify::verify(&ctx, language, &self.data, &interaction).await {
-                        interaction
-                            .create_followup_message(&ctx, |r| {
-                                r.ephemeral(true).content(format!("ERROR: {}", e))
-                            })
-                            .await
-                            .unwrap();
+                        if let Ok(Some(log)) =
+                            GuildConfig::read(interaction.guild_id.unwrap()).map(|gc| *gc.log())
+                        {
+                            log.say(&ctx, format!("{e}")).await.unwrap();
+                        }
                     }
                 }
             }
