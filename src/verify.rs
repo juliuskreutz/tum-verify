@@ -277,6 +277,13 @@ fn handle_interaction(
             match interaction_id {
                 MessageInteractionId::Language(language) => {
                     state.language = language;
+
+                    match state.interaction_state {
+                        InteractionState::AskTumId => state.message_state = MessageState::TumId,
+                        InteractionState::AskToken => state.message_state = MessageState::Token,
+                        _ => {}
+                    };
+
                     state.interaction_state = InteractionState::None;
                 }
                 MessageInteractionId::EnterTumId => {
