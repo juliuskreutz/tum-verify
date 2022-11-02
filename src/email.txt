@@ -1,0 +1,13 @@
+# {{title_email}}
+
+{{text_email}}
+
+{{text_email_user}}: {{user_tag}}
+Discord: {{guild_name}}
+
+{{text_email_token}}
+
+====================================
+
+{{token}}
+

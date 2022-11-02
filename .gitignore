@@ -1,0 +1,10 @@
+*.toml
+!Cargo.toml
+
+.idea/
+.vscode/
+
+target/
+
+db.sqlite
+Cargo.lock

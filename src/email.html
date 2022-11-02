@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+    </head>
+    <style>
+        img {
+            border-radius: 50%;
+        }
+    </style>
+
+    <body class="bg-light">
+        <div class="d-flex p-2 justify-content-center">
+            <img class="ax-center my-10 w-24" src="{{guild_icon_url}}" />
+        </div>
+        <div class="card m-5 mt-3">
+            <div class="card-body">
+                <h5 class="card-title">{{title_email}}</h5>
+                <p class="card-text">{{text_email}}</p>
+
+                <div class="d-inline-flex flex-column bd-highlight mb-3">
+                    <div>
+                        <strong>{{text_email_user}}</strong>
+                        <span class="text-secondary">{{user_tag}}</span>
+                    </div>
+                    <div>
+                        <strong>Discord</strong>
+                        <span class="text-secondary">{{guild_name}}</span>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input
+                        type="text"
+                        class="form-control"
+                        value="{{token}}"
+                        aria-label="Token"
+                        readonly
+                    />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
