@@ -4,7 +4,7 @@ use crate::{
     config::GuildConfig,
     database, email,
     serenity::{self, Mentionable},
-    INPUT_ID_TOKEN, INPUT_ID_TUM_ID,
+    util, INPUT_ID_TOKEN, INPUT_ID_TUM_ID,
 };
 use anyhow::{Context, Result};
 use derive_getters::Getters;
@@ -320,7 +320,7 @@ fn handle_interaction(
                         .value
                         .clone();
 
-                    if crate::is_valid_tum_id(&tum_id) {
+                    if util::is_valid_tum_id(&tum_id) {
                         state.interaction_state = InteractionState::ReceivedValidTumId;
                         info.tum_id = tum_id;
                     } else {

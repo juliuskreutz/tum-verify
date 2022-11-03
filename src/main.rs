@@ -11,6 +11,7 @@ mod email;
 mod prelude;
 mod serenity;
 mod ui;
+mod util;
 mod verify;
 
 const APPLICATION_ID_INIT: &str = "init";
