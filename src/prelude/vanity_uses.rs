@@ -8,7 +8,6 @@ pub trait VanityUses {
 
 #[serenity::async_trait]
 impl VanityUses for serenity::GuildId {
-    //FIXME: Maybe do better?
     async fn vanity_uses(&self, ctx: &serenity::Context) -> Result<u64> {
         let vanity_url = self.vanity_url(&ctx).await?;
 
