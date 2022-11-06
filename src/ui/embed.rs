@@ -8,7 +8,7 @@ pub fn verify<'a>(
         .thumbnail(guild.icon_url().unwrap())
         .title(&guild.name)
         .description(format!("
-            :flag_de: Willkommen an den **{0}** Server! Wenn sie die Verifikationsanleitungen auf **Deutsch** haben wollen, drücken sie unter der Nachricht auf die Deutsche Flagge.
+            :flag_de: Willkommen an den **{0}** Server! Wenn Sie die Verifikationsanleitungen auf **Deutsch** haben wollen, drücken Sie unter der Nachricht auf die Deutsche Flagge.
 
             :flag_gb: Welcome to the **{0}** server! If you want to proceed with the **English** verification instructions, please press the button of the United Kingdom below.
         ", &guild.name))
