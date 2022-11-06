@@ -14,7 +14,7 @@ pub fn tum_id<'a, 'b>(
                         r.create_input_text(|i| {
                             i.custom_id(INPUT_ID_TUM_ID)
                                 .label(language.text_tum_id())
-                                .placeholder("ab12cde")
+                                .placeholder("ge24geh")
                                 .style(serenity::component::InputTextStyle::Short)
                         })
                     })
