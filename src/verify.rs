@@ -77,7 +77,6 @@ pub async fn join(
         let vanity_uses_after = member.guild_id.vanity_uses(ctx).await?;
 
         if vanity_uses_after == vanity_uses_before {
-            println!("{vanity_uses_after} {vanity_uses_before}");
             return Ok(());
         }
 
@@ -86,9 +85,13 @@ pub async fn join(
             .and_modify(|uses| *uses += 1);
     }
 
-    if database::is_verified(member.user.id)? {
-        let guild_config = GuildConfig::read(member.guild_id)?;
+    let guild_config = GuildConfig::read(member.guild_id)?;
 
+    if let Some(remove) = guild_config.remove() {
+        member.add_role(ctx, remove).await?;
+    }
+
+    if database::is_verified(member.user.id)? {
         if let Some(add) = guild_config.add() {
             member.add_role(ctx, add).await?;
         }

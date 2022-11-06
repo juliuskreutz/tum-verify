@@ -37,7 +37,8 @@ impl Handler {
                 .id
                 .set_application_commands(&ctx, |b| {
                     b.create_application_command(|c| {
-                        c.name(APPLICATION_ID_INIT)
+                        c.default_member_permissions(serenity::Permissions::ADMINISTRATOR)
+                            .name(APPLICATION_ID_INIT)
                             .description("Inits the message and bot")
                             .create_option(|o| {
                                 o.name(OPTION_ID_ADD)

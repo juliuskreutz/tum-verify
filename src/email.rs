@@ -59,7 +59,7 @@ pub async fn send_email(email_config: &EmailConfig, email_data: EmailData) -> Re
     let email = lettre::Message::builder()
         .from(format!("{} <{}>", email_config.name(), email_config.email()).parse()?)
         .to(format!("<{}@mytum.de>", email_data.tum_id).parse()?)
-        .subject(&language.title_email())
+        .subject(language.title_email())
         .multipart(MultiPart::alternative_plain_html(email_txt, email_html))?;
 
     let creds = authentication::Credentials::new(
