@@ -57,6 +57,7 @@ impl Language {
 
     pub fn text_email(&self) -> String {
         match self {
+            // TODO: Add content
             Language::German => {
                 "Jemand hat deine Kennung benutzt tralalala, Wenn's nicht du bist, ignorieren."
                     .to_string()
