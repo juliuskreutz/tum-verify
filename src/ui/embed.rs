@@ -1,6 +1,5 @@
 use crate::{serenity, Language};
 
-//TODO: Make this nice
 pub fn verify<'a>(
     embed: &'a mut ::serenity::builder::CreateEmbed,
     guild: &serenity::PartialGuild,
