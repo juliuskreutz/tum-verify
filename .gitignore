@@ -1,5 +1,6 @@
 *.toml
 !Cargo.toml
+!config_sample.toml
 
 .idea/
 .vscode/

@@ -1,0 +1,8 @@
+token = "TOKEN"
+
+[email]
+name = "Max Mustermann"
+email = "max.mustermann@gmail.com"
+host = "mail.gmail.com"
+user = "Max"
+password = "max12"
