@@ -121,7 +121,7 @@ impl serenity::EventHandler for Handler {
                     interaction
                         .create_interaction_response(&ctx, |r| {
                             r.interaction_response_data(|m| {
-                                message::verify(m, &guild.icon_url().unwrap())
+                                message::verify(m, &guild)
                             })
                         })
                         .await

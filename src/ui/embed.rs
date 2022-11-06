@@ -3,11 +3,16 @@ use crate::{serenity, Language};
 //TODO: Make this nice
 pub fn verify<'a>(
     embed: &'a mut ::serenity::builder::CreateEmbed,
-    icon_url: &str,
+    guild: &serenity::PartialGuild,
 ) -> &'a mut ::serenity::builder::CreateEmbed {
     embed
-        .thumbnail(icon_url)
-        .description("Click here to verify")
+        .thumbnail(guild.icon_url().unwrap())
+        .title(&guild.name)
+        .description(format!("
+            :flag_de: Willkommen an den **{0}** Server! Wenn sie die Verifikationsanleitungen auf **Deutsch** haben wollen, drücken sie unter der Nachricht auf die Deutsche Flagge.
+
+            :flag_gb: Welcome to the **{0}** server! If you want to proceed with the **English** verification instructions, please press the button of the United Kingdom below.
+        ", &guild.name))
 }
 
 //TODO: Make this nice

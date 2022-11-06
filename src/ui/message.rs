@@ -1,8 +1,8 @@
 use super::embed;
 use crate::{serenity, Language, MessageBuilder, MessageInteractionId};
 
-pub fn verify<'a, T: MessageBuilder>(m: &'a mut T, icon_url: &str) -> &'a mut T {
-    m.embed(|e| embed::verify(e, icon_url)).components(|c| {
+pub fn verify<'a, T: MessageBuilder>(m: &'a mut T, guild: &serenity::PartialGuild) -> &'a mut T {
+    m.embed(|e| embed::verify(e, guild)).components(|c| {
         c.create_action_row(|r| {
             for l in enum_iterator::all::<Language>() {
                 r.create_button(|b| {
