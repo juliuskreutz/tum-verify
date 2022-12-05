@@ -91,8 +91,14 @@ impl Language {
 
     pub fn text_success(&self) -> String {
         match self {
-            Language::German => "Sie sind jetzt verifiziert und haben Zugang zu Servern des TUM Netzwerks.".to_string(),
-            Language::English => "You are now verified and have access to servers within the TUM Network.".to_string(),
+            Language::German => {
+                "Sie sind jetzt verifiziert und haben Zugang zu Servern des TUM Netzwerks."
+                    .to_string()
+            }
+            Language::English => {
+                "You are now verified and have access to servers within the TUM Network."
+                    .to_string()
+            }
         }
     }
 
@@ -116,13 +122,12 @@ impl Language {
 
     pub fn text_email(&self) -> String {
         match self {
-            // TODO: Add content
             Language::German => {
-                "Jemand hat deine Kennung benutzt tralalala, Wenn's nicht du bist, ignorieren."
+                "Jemand hat deine TUM-Kennung verwendet, um auf dein Studenten-Netzwerk im Discord zuzugreifen. Wenn das nicht Sie waren, bitte ignorieren Sie die email."
                     .to_string()
             }
             Language::English => {
-                "Someone used your TUM Id to etc., if this is not you, ignore.".to_string()
+                "Someone used your TUM Id to sign up to the student-run TUM Discord Network. If this was not you, please ignore this email.".to_string()
             }
         }
     }
