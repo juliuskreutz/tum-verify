@@ -9,6 +9,14 @@ pub enum Language {
 }
 
 impl Language {
+    pub fn init_message(guild: &serenity::PartialGuild) -> String {
+        format!("
+            :flag_de: Willkommen an den **{0}** Server! Wenn Sie die Verifikationsanleitungen auf **Deutsch** haben wollen, drücken Sie unter der Nachricht auf die Deutsche Flagge.
+
+            :flag_gb: Welcome to the **{0}** server! If you want to proceed with the **English** verification instructions, please press the button of the United Kingdom below.
+        ", &guild.name)
+    }
+
     pub fn emoji(&self) -> serenity::ReactionType {
         match self {
             Language::German => serenity::ReactionType::Unicode("🇩🇪".to_string()),
