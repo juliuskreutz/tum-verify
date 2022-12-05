@@ -55,13 +55,6 @@ pub fn success(
 ) -> &mut serenity::CreateEmbed {
     embed
         .color((52, 235, 82))
-        .title(language.title_network_verification());
-
-    match language {
-        Language::German => embed.description(
-            "Sie sind jetzt verifiziert und haben Zugang zu Servern des TUM Netzwerks.",
-        ),
-        Language::English => embed
-            .description("You are now verified and have access to servers within the TUM Network."),
-    }
+        .title(language.title_network_verification())
+        .description(language.text_success())
 }

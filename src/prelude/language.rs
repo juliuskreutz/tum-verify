@@ -90,6 +90,13 @@ impl Language {
         }
     }
 
+    pub fn text_success(&self) -> String {
+        match self {
+            Language::German => "Sie sind jetzt verifiziert und haben Zugang zu Servern des TUM Netzwerks.".to_string(),
+            Language::English => "You are now verified and have access to servers within the TUM Network.".to_string(),
+        }
+    }
+
     pub fn text_token(&self) -> String {
         "Token".to_string()
     }
