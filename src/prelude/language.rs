@@ -46,10 +46,9 @@ impl Language {
     }
 
     pub fn text_click_btn_for_tum_id(&self) -> String {
-        // TODO make this nice
         match self {
-            Language::German => "Hallo bitte button drücken um TUM Kennung einzugeben".to_string(),
-            Language::English => "Hello please press button to enter TUM Id".to_string(),
+            Language::German => "Um mit der Verifikation zu starten, bitte drücken Sie auf den Knopf unten und geben Sie Ihre TUM Id ein.".to_string(),
+            Language::English => "To start with the verification process, please click the button below and provide your tum id.".to_string(),
         }
     }
 
