@@ -45,30 +45,8 @@ pub fn invalid_token<'a>(
 ) -> &'a mut serenity::CreateEmbed {
     embed
         .color((242, 121, 80))
-        .title(language.title_network_verification());
-
-    match language {
-        Language::German => embed
-            .description(format!(
-                "
-                Eine Email wurde an Ihre TUM-Email geschickt. Bitte schreiben Sie den dort angegebenen code hier rein \
-                ([TUM-Email Anleitung](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'TUM-Email Anleitung')). \
-                Email verschickt an:
-                ```\n{tum_id}@mytum.de\n```
-                :warning: Ungültiger token eingegeben. Bitte geben Sie den Token ein, den Sie in der email gekriegt haben.
-                "
-            )),
-        Language::English => embed
-            .description(format!(
-                "
-                An email has been sent to your TUM-account. Please send the code contained within into this channel \
-                ([TUM-Email Guide](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'How to access your TUM-Email')). \
-                Email sent to:
-                ```\n{tum_id}@mytum.de\n```
-                :warning: Invalid token entered. Please provide the token, which you created in your email.
-                "
-            )),
-    }
+        .title(language.title_network_verification())
+        .description(language.text_token_err(tum_id))
 }
 
 pub fn success(

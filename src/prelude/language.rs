@@ -82,6 +82,14 @@ impl Language {
         }
     }
 
+    pub fn text_token_err(&self, tum_id: &str) -> String {
+        let r = format!("{}\n", self.text_email_sent(tum_id));
+        match self {
+            Language::German => r + ":warning: Ungültiger token eingegeben. Bitte geben Sie den Token ein, den Sie in der email gekriegt haben.",
+            Language::English => r + ":warning: Invalid token entered. Please provide the token, which you created in your email.",
+        }
+    }
+
     pub fn text_token(&self) -> String {
         "Token".to_string()
     }
