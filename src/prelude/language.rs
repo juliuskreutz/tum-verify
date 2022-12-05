@@ -61,6 +61,27 @@ impl Language {
         }
     }
 
+    pub fn text_email_sent(&self, tum_id: &str) -> String {
+        match self {
+            Language::German => format!(
+                "
+                Eine Email wurde an Ihre TUM-Email geschickt. Bitte schreiben Sie den dort angegebenen code hier rein \
+                ([TUM-Email Anleitung](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'TUM-Email Anleitung')). \
+                Email verschickt an:
+                ```\n{tum_id}@mytum.de\n```
+                "
+            ),
+            Language::English => format!(
+                "
+                An email has been sent to your TUM-account. Please send the code contained within into this channel \
+                ([TUM-Email Guide](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'How to access your TUM-Email')). \
+                Email sent to:
+                ```\n{tum_id}@mytum.de\n```
+                "
+            ),
+        }
+    }
+
     pub fn text_token(&self) -> String {
         "Token".to_string()
     }
