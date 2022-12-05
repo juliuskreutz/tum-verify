@@ -24,24 +24,8 @@ pub fn invalid_tum_id(
 ) -> &mut serenity::CreateEmbed {
     embed
         .color((242, 121, 80))
-        .title(language.title_network_verification());
-
-    match language {
-        Language::German => embed.description(
-            "
-            Hallo bitte button drücken um TUM Kennung einzugeben
-
-            :warning: Falsches Format der TUM Kennung (ab12cde)
-            ",
-        ),
-        Language::English => embed.description(
-            "
-            Hello please press button to enter TUM Id
-
-            :warning: Wrong TUM Id format (ab12cde)
-            ",
-        ),
-    }
+        .title(language.title_network_verification())
+        .description(language.text_click_btn_for_tum_id_err())
 }
 
 pub fn token<'a>(
