@@ -45,6 +45,14 @@ impl Language {
         }
     }
 
+    pub fn text_click_btn_for_tum_id(&self) -> String {
+        // TODO make this nice
+        match self {
+            Language::German => "Hallo bitte button drücken um TUM Kennung einzugeben".to_string(),
+            Language::English => "Hello please press button to enter TUM Id".to_string(),
+        }
+    }
+
     pub fn text_token(&self) -> String {
         "Token".to_string()
     }

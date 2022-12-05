@@ -10,24 +10,11 @@ pub fn verify<'a>(
         .description(Language::init_message(guild))
 }
 
-//TODO: Make this nice
 pub fn tum_id(embed: &mut serenity::CreateEmbed, language: Language) -> &mut serenity::CreateEmbed {
     embed
         .color((52, 137, 235))
-        .title(language.title_network_verification());
-
-    match language {
-        Language::German => embed.description(
-            "
-                Hallo bitte button drücken um TUM Kennung einzugeben
-                ",
-        ),
-        Language::English => embed.description(
-            "
-                Hello please press button to enter TUM Id
-                ",
-        ),
-    }
+        .title(language.title_network_verification())
+        .description(language.text_click_btn_for_tum_id())
 }
 
 //TODO: Make this nice
