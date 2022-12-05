@@ -56,8 +56,8 @@ impl Language {
     pub fn text_click_btn_for_tum_id_err(&self) -> String {
         let r = format!("{}\n\n", self.text_click_btn_for_tum_id());
         match self {
-            Language::German => r + ":warning: Falsches Format der TUM Kennung (ab12cde)",
-            Language::English => r + ":warning: Wrong TUM Id format (ab12cde)",
+            Language::German => r + ":warning: Falsches Format der TUM Kennung (ge69tum)",
+            Language::English => r + ":warning: Wrong TUM Id format (ge69tum)",
         }
     }
 
