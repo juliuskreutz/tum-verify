@@ -216,6 +216,7 @@ pub async fn verify(
                 database::add_verified(member.user.id, &info.tum_id)?;
 
                 if let Some(log) = guild_config.log() {
+                    // TODO add embed?
                     log.say(ctx, format!("{} verified!", member.user.mention()))
                         .await?;
                 }
