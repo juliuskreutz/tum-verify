@@ -17,7 +17,6 @@ pub fn tum_id(embed: &mut serenity::CreateEmbed, language: Language) -> &mut ser
         .description(language.text_click_btn_for_tum_id())
 }
 
-//TODO: Make this nice
 pub fn invalid_tum_id(
     embed: &mut serenity::CreateEmbed,
     language: Language,
