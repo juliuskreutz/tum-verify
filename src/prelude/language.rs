@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 pub enum Language {
     German,
     English,
+    Russian,
 }
 
 impl Language {
@@ -14,6 +15,8 @@ impl Language {
             :flag_de: Willkommen an den **{0}** Server! Wenn Sie die Verifikationsanleitungen auf **Deutsch** haben wollen, drücken Sie unter der Nachricht auf die Deutsche Flagge.
 
             :flag_gb: Welcome to the **{0}** server! If you want to proceed with the **English** verification instructions, please press the button of the United Kingdom below.
+
+            :flag_ru: Добро пожаловать на сервер «{0}». Чтобы пройти верификацию с _русской_ версией инструкций, нажмите на флаг России снизу.
         ", &guild.name)
     }
 
@@ -21,6 +24,7 @@ impl Language {
         match self {
             Language::German => serenity::ReactionType::Unicode("🇩🇪".to_string()),
             Language::English => serenity::ReactionType::Unicode("🇬🇧".to_string()),
+            Language::Russian => serenity::ReactionType::Unicode("🇷🇺".to_string())
         }
     }
 
@@ -28,6 +32,7 @@ impl Language {
         match self {
             Language::German => "Eingeben".to_string(),
             Language::English => "Enter".to_string(),
+            Language::Russian => "Ввод".to_string(),    
         }
     }
 
@@ -35,6 +40,7 @@ impl Language {
         match self {
             Language::German => "Abbrechen".to_string(),
             Language::English => "Abort".to_string(),
+            Language::Russian => "Отменить".to_string(),
         }
     }
 
@@ -42,6 +48,7 @@ impl Language {
         match self {
             Language::German => "TUM Kennung".to_string(),
             Language::English => "TUM Id".to_string(),
+            Language::Russian => "ТУМ Логин".to_string(),
         }
     }
 
@@ -49,6 +56,7 @@ impl Language {
         match self {
             Language::German => "Um mit der Verifikation zu starten, bitte drücken Sie auf den Knopf unten und geben Sie Ihre TUM Id ein.".to_string(),
             Language::English => "To start with the verification process, please click the button below and provide your tum id.".to_string(),
+            Language::Russian => "Чтобы начать верификацию нажмите кнопку снизу и введите ваш ТУМ-овый код.".to_string(),
         }
     }
 
@@ -57,6 +65,7 @@ impl Language {
         match self {
             Language::German => r + ":warning: Falsches Format der TUM Kennung (ge69tum)",
             Language::English => r + ":warning: Wrong TUM Id format (ge69tum)",
+            Language::Russian => r + ":warning: Неверный формат идентификации ТУМа (ge69tum)",
         }
     }
 
@@ -78,6 +87,15 @@ impl Language {
                 ```\n{tum_id}@mytum.de\n```
                 "
             ),
+
+            Language::Russian => format!(
+                "
+                На ваш аккаунт ТУМа был выслан э-майл. Пожалуйста введите код в этот канал. \
+                ([TUM-Email Guide](https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/pl/ui/$ctx/help.file_help?$ctx=design=ca2;header=max;lang=de&app_kb=BM&corg=&seite_nr=500231&sprache_nr=1 'How to access your TUM-Email')). \
+                Код выслан на:
+                ```\n{tum_id}@mytum.de\n```
+                "
+            ),
         }
     }
 
@@ -86,6 +104,7 @@ impl Language {
         match self {
             Language::German => r + ":warning: Ungültiger token eingegeben. Bitte geben Sie den Token ein, den Sie in der email gekriegt haben.",
             Language::English => r + ":warning: Invalid token entered. Please provide the token, which you created in your email.",
+            Language::Russian => r + ":warning: Неверный код. Пожалуйста введите код, который был в вашем е мейле.",            
         }
     }
 
@@ -99,6 +118,10 @@ impl Language {
                 "You are now verified and have access to servers within the TUM Network."
                     .to_string()
             }
+            Language::Russian => {
+                "Верификация окончена и у вас теперь есть доступ к серверам ТУМа."
+                    .to_string()
+            }
         }
     }
 
@@ -110,6 +133,7 @@ impl Language {
         match self {
             Language::German => "(Studentenorganisierter) TUM Discord ○ Verifikation".to_string(),
             Language::English => "(Student-run) TUM Discord ○ Verification".to_string(),
+            Language::Russian => "Студенческий Дискорд ТУМа ○ Верификация".to_string(),
         }
     }
 
@@ -117,6 +141,7 @@ impl Language {
         match self {
             Language::German => "TUM Discord Netzwerk ○ Verifikations Code".to_string(),
             Language::English => "TUM Discord Network ○ Verification Code".to_string(),
+            Language::Russian => "Студенческий Дискорд ТУМа ○ Верификационный код".to_string(),
         }
     }
 
@@ -129,6 +154,9 @@ impl Language {
             Language::English => {
                 "Someone used your TUM Id to sign up to the student-run TUM Discord Network. If this was not you, please ignore this email.".to_string()
             }
+            Language::Russian => {
+                "Кто-то вошёл в студенческий дискорд сервер с вашем ТУМ Id. Если это были не вы то проигнорируйте это сообщение.".to_string()
+            }
         }
     }
 
@@ -136,6 +164,7 @@ impl Language {
         match self {
             Language::German => "Nutzer".to_string(),
             Language::English => "User".to_string(),
+            Language::Russian => "Пользователь".to_string(),
         }
     }
 
@@ -143,6 +172,7 @@ impl Language {
         match self {
             Language::German => "UNTEN FINDEN SIE DEN TOKEN ANGEHÄNGT AN DIE EMAIL".to_string(),
             Language::English => "BELOW YOU CAN FIND THE TOKEN ATTACHED TO THE EMAIL".to_string(),
+            Language::Russian => "ВНИЗУ В Е-МАЙЛЕ ВЫ НАЙДЁТЕ КОД".to_string(),
         }
     }
 }
