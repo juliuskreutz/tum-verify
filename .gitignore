@@ -10,3 +10,4 @@ target/
 db.sqlite
 Cargo.lock
 ._target
+*.DS_Store
